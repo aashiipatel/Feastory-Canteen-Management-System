@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="orders">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>My Orders</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+   <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body ng-controller="ordersCtrl">
+   <header class="header">
+      <section class="flex">
+         <a href="home.html" class="logo">
+            <img src="images/wlogo.PNG" alt="Logo" width="200px">
+         </a>
+         <nav class="navbar">
+            <a href="home.html">home</a>
+            <a href="about.html">about</a>
+            <a href="menu.html">menu</a>
+            <a href="orders.html">orders</a>
+            <a href="contact.html">contact</a>
+         </nav>
+
+         <div class="icons">
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="menu-btn" class="fas fa-bars"></div>
+         </div>
+
+         <div class="profile">
+            <p class="name" id="profileName"></p>
+            <div class="flex">
+               <button onclick="window.location.href='profile.html'" class="btn">profile</button>
+               <button onclick="logout()" class="delete-btn">logout</button>
+            </div>
+            <p class="account"><a href="login.html">Student</a> or <a href="canteenlogin.html">Canteen Manager</a></p>
+         </div>
+      </section>
+   </header>
+
+   <div class="heading">
+      <h3>Your Orders</h3>
+      <p><a href="home.html">home</a> <span> / orders</span></p>
+   </div>
+
+   <section class="orders">
+      <h1 class="title">Placed Orders</h1>
+      <div class="box-container">
+         <table>
+            <tr ng-repeat="row in getRows()">
+               <td ng-repeat="x in row">
+                  <div class="box">
+                     <p>Placed on: <span>{{ x.created_at }}</span></p>
+                     <p>Order ID: <span>{{ x.OrderId }}</span></p>
+                     <p>SAP ID: <span>{{ x.SAPID }}</span></p>
+                     <p>Dish Name: <span>{{ x.dishName }}</span></p>
+                     <p>Order Status: <span>{{ x.stat }}</span></p>
+                  </div>
+               </td>
+            </tr>
+         </table>
+      </div>
+   </section>
+
+   <footer>
+      <div class="row">
+         <div class="col">
+            <h1><i>Welcome to Laxmi Caterers!</i> </h1>
+            <br><br>
+            <p>Hungry between lectures? Craving a quick bite or a refreshing drink? Our canteen is your go-to spot! From
+               crispy samosas to cheesy sandwiches, from chai breaks to chilled frappés, we’ve got all your cravings
+               covered.</p>
+         </div>
+         <div class="col">
+            <h3 style="color: #fed330;">Office</h3>
+            <p>Mukesh Patel School Of Technology and Management<br>VPD Scheme, Vile Parle West<br>Mumbai, Maharashtra
+               400047, India</p>
+            <p class="email-id">thefeastory@gmail.com</p>
+            <h4>+91 - 0123456789</h4>
+         </div>
+         <div class="col">
+            <h3 style="color: #fed330;">Links</h3>
+            <ul>
+               <li><a href="login.html">Log In</a></li>
+               <li><a href="contact.html">Contact Us</a></li>
+               <li><a href="about.html">About Us</a></li>
+            </ul>
+         </div>
+         <div class="col">
+            <img src="images/laxmicaterslogo.png" class="logo">
+            <div class="social-icons">
+               <i class="fa-brands fa-facebook"></i>
+               <i class="fa-brands fa-twitter"></i>
+               <i class="fa-brands fa-whatsapp"></i>
+               <i class="fa-brands fa-pinterest"></i>
+            </div>
+         </div>
+      </div>
+      <hr>
+   </footer>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+   <script>
+      const { createClient } = supabase;
+      supabase = createClient(
+         'https://alqrmjghvgnbinoxsxwq.supabase.co',
+         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFscXJtamdodmduYmlub3hzeHdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5MTk5MDIsImV4cCI6MjA1ODQ5NTkwMn0.9HKUgPNaR3iSFIf-ztUDnizSPyErzHiRHC_ETEHlrG0'
+      );
+   </script>
+
+   <script>
+      async function name() {
+         const { data, error } = await supabase
+            .from('studentSignUp')
+            .select('Name')
+            .eq('login', 'TRUE');
+         if (data && data[0]) {
+            document.getElementById("profileName").innerHTML = data[0].Name;
+         }
+      }
+      name();
+
+      async function logout() {
+         await supabase
+            .from('studentSignUp')
+            .update({ login: '0' })
+            .eq('login', 'TRUE');
+         document.getElementById("profileName").innerHTML = "";
+         window.location.href = "login.html"; // optional: redirect after logout
+      }
+   </script>
+
+   <script>
+      var app = angular.module('orders', []);
+      app.controller('ordersCtrl', function ($scope) {
+         $scope.orderList = [];
+
+         async function fetchOrders() {
+            try {
+               const { data: userData, error: userError } = await supabase
+                  .from('studentSignUp')
+                  .select()
+                  .eq('login', 'TRUE')
+                  .single();
+
+               if (userError || !userData) {
+                  console.error("Could not get SAPID", userError);
+                  return;
+               }
+
+               const sap = userData.SAPID;
+
+               const { data: orders, error: ordersError } = await supabase
+                  .from('Orders')
+                  .select()
+                  .eq('SAPID', sap);
+
+               if (ordersError) {
+                  console.error("Error fetching orders:", ordersError);
+                  return;
+               }
+
+               // Assign status for each order
+               orders.forEach(order => {
+                  if (order.Served === true) {
+                     order.stat = 'served';
+                  } else if (order.Ready === true) {
+                     order.stat = 'ready to pick';
+                  } else if (order.Pending === true ) {
+                     order.stat = 'placed';
+                  } else {
+                     order.stat = 'unknown';
+                  }
+
+                  console.log(order.Pending);
+               });
+
+               $scope.orderList = orders;
+               $scope.$applyAsync();
+            } catch (err) {
+               console.error("Unexpected error:", err);
+            }
+         }
+
+         $scope.getRows = function () {
+            const rows = [];
+            for (let i = 0; i < $scope.orderList.length; i += 2) {
+               rows.push($scope.orderList.slice(i, i + 2));
+            }
+            return rows;
+         };
+
+         fetchOrders();
+      });
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+   <header class="header">
+      <section class="flex">
+         <a href="home.html" class="logo">
+            <img src="images/wlogo.PNG" alt="Logo" width="200px">
+         </a>
+         <nav class="navbar">
+            <a href="home.html">home</a>
+            <a href="about.html">about</a>
+            <a href="">menu</a>
+            <a href="">orders</a>
+            <a href="contact.html">contact</a>
+         </nav>
+
+         <div class="icons">
+            <a href="search.html"><i class="fas fa-search"></i></a>
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="menu-btn" class="fas fa-bars"></div>
+         </div>
+
+         <div class="profile">
+            <p class="name" id="profileName"></p>
+            <div class="flex">
+               <button class="btn">profile</button>
+               <button onclick="logout()" class="delete-btn">logout</button>
+            </div>
+            <p class="account"><a href="login.html">Student</a> or <a href="canteenlogin.html">Canteen Manager</a></p>
+         </div>
+      </section>
+   </header>
+
+   <section class="form-container">
+      <form id="logIn">
+         <h3>login now</h3>
+         <input type="number" id="eid" name="Emp_ID" placeholder="Enter your Employee ID" class="box" required>
+         <input type="password" id="epin" name="PIN" placeholder="Enter your PIN" class="box" required>
+         <button type="submit" class="btn">Log In</button>
+      </form>
+   </section>
+
+   <script src="js/script.js"></script>
+   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+   <script>
+      const { createClient } = supabase;
+      const supabaseClient = createClient(
+         'https://alqrmjghvgnbinoxsxwq.supabase.co',
+         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFscXJtamdodmduYmlub3hzeHdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5MTk5MDIsImV4cCI6MjA1ODQ5NTkwMn0.9HKUgPNaR3iSFIf-ztUDnizSPyErzHiRHC_ETEHlrG0'
+      );
+
+      document.getElementById('logIn').addEventListener('submit', async (event) => {
+         event.preventDefault();
+
+         const eid = document.getElementById('eid').value.trim();
+         const epin = document.getElementById('epin').value.trim();
+
+         const idRegex = /^[1-9][0-9]{9}$/;
+         const pinRegex = /^[0-9]{4}$/;
+
+         if (!eid) {
+            alert("Employee ID is required.");
+            return;
+         } else if (!idRegex.test(eid)) {
+            alert("Employee ID should be exactly 10 digits and should not start with 0.");
+            return;
+         }
+
+         if (!epin) {
+            alert("PIN is required.");
+            return;
+         } else if (!pinRegex.test(epin)) {
+            alert("PIN should be exactly 4 digits.");
+            return;
+         }
+
+         try {
+            const { data, error } = await supabaseClient
+               .from('canteenSignUp')
+               .select('Emp_ID, PIN')
+               .eq('Emp_ID', eid)
+               .single();
+
+            if (error || !data) {
+               alert("Invalid credentials or user not found.");
+               console.error(error);
+               return;
+            }
+            console.log(data)
+            console.log(epin)
+            if (data['PIN'] == epin) {
+               alert("Login successful! Redirecting...");
+
+               await supabaseClient
+                  .from('canteenSignUp')
+                  .update({ login: '1' })
+                  .eq('Emp_ID', eid);
+
+               window.location.href = 'canteenorders.html';
+            } else {
+               alert("Incorrect PIN.");
+            }
+         } catch (err) {
+            console.error("Unexpected error:", err);
+            alert("Something went wrong during login.");
+         }
+      });
+   </script>
+
+   <script>
+      async function name() {
+         const { data, error } = await supabase
+            .from('canteenSignUp')
+            .select('Emp_ID')
+            .eq('login', 'TRUE');
+         document.getElementById("profileName").innerHTML = data[0].Emp_ID;
+      }
+      name();
+
+      async function logout() {
+         const { error } = await supabase
+            .from('canteenSignUp')
+            .update({ login: '0' })
+            .eq('login', 'TRUE')
+         document.getElementById("profileName").innerHTML = "";
+      }
+   </script>
+</body>
+
+</html>

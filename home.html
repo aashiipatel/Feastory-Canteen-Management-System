@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>home</title>
+
+   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+   <header class="header">
+      <section class="flex">
+         <a href="home.html" class="logo">
+            <img src="images/wlogo.PNG" alt="Logo" width="200px">
+         </a>
+         <nav class="navbar">
+            <a href="home.html">home</a>
+            <a href="about.html">about</a>
+            <a href="menu.html">menu</a>
+            <a href="orders.html">orders</a>
+            <a href="contact.html">contact</a>
+         </nav>
+
+         <div class="icons">
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="menu-btn" class="fas fa-bars"></div>
+         </div>
+
+         <div class="profile">
+            <p class="name" id="profileName"></p>
+            <div class="flex">
+               <button onclick="window.location.href='profile.html'" class="btn">profile</button>
+               <button onclick="logout()" class="delete-btn">logout</button>
+            </div>
+            <p class="account"><a href="login.html">Student</a> or <a href="canteenlogin.html">Canteen Manager</a></p>
+         </div>
+
+      </section>
+
+   </header>
+   <section class="home">
+      <div class="swiper home-slider">
+         <div class="swiper-wrapper">
+            <div class="swiper-slide slide">
+               <div class="content">
+                  <span>Your Meal, Just a Click Away.</span>
+                  <h3><i>Slice into happiness with every bite!,Order Now!</i></h3>
+                  <a href="menu.html" class="btn">see menus</a>
+               </div>
+               <div class="image">
+                  <img src="images\bg2.png" alt="">
+               </div>
+            </div>
+
+            <div class="swiper-slide slide">
+               <div class="content">
+                  <span>order now</span>
+                  <h3>Crispy, golden dosa – a bite of South Indian bliss!</h3>
+                  <a href="menu.html" class="btn">see menus</a>
+               </div>
+               <div class="image">
+                  <img src="images\bg3.png" alt="">
+               </div>
+            </div>
+
+            <div class="swiper-slide slide">
+               <div class="content">
+                  <span>order now</span>
+                  <h3>Chilled to thrill – your perfect Cold Coffee fix!</h3>
+                  <a href="menu.html" class="btn">see menus</a>
+               </div>
+               <div class="image">
+                  <img src="images\bg4.png" alt="">
+               </div>
+            </div>
+
+         </div>
+
+         <div class="swiper-pagination"></div>
+
+      </div>
+
+   </section>
+
+   <section class="category">
+
+      <h1 class="title">food category</h1>
+
+      <div class="box-container">
+
+         <a href="menu.html" class="box">
+            <img src="images/cat-1.png" alt="">
+            <h3>quick Bites</h3>
+         </a>
+
+         <a href="menu.html" class="box">
+            <img src="images/cat-2.png" alt="">
+            <h3>main dishes</h3>
+         </a>
+
+         <a href="menu.html" class="box">
+            <img src="images/cat-3.png" alt="">
+            <h3>drinks</h3>
+         </a>
+
+         <a href="menu.html" class="box">
+            <img src="images/cat-4.png" alt="">
+            <h3>desserts</h3>
+         </a>
+
+      </div>
+
+   </section>
+
+   <section class="products">
+
+      <h1 class="title">latest dishes</h1>
+
+      <div class="box-container">
+
+         <div class="box">
+            <button class="fas fa-shopping-cart" type="button" onclick="addToCart('Vada Pav', 17, this)"></button>
+            <img src="images/vadapav.jpg" alt="">
+            <a href="category.html" class="cat">breakfast</a>
+            <div class="name">Vada Pav</div>
+            <div class="flex">
+               <div class="price"><span>Rs</span>17<span>/-</span></div>
+               <input type="number" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+            </div>
+         </div>
+         
+
+         <div class="box">
+            <button class="fas fa-shopping-cart" type="button" onclick="addToCart('Pav Bhaji', 63, this)"></button>
+            <img src="images/pav_bhaji.jpg" alt="">
+            <a href="menu.html" class="cat">main dish</a>
+            <div class="name">Pav Bhaji</div>
+            <div class="flex">
+               <div class="price"><span>Rs</span>63<span>/-</span></div>
+               <input type="number" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+            </div>
+         </div>
+         
+         <div class="box">
+            <button class="fas fa-shopping-cart" type="button" onclick="addToCart('Manchurian Franky', 58, this)"></button>
+            <img src="images/veg_manchurian_dry.jpg" alt="">
+            <a href="menu.html" class="cat">main dish</a>
+            <div class="name">Manchurian Franky</div>
+            <div class="flex">
+               <div class="price"><span>Rs</span>58<span>/-</span></div>
+               <input type="number" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+            </div>
+         </div>
+         <div class="box">
+            <button class="fas fa-shopping-cart" type="button" onclick="addToCart('Schezwan Fried Rice', 76, this)"></button>
+            <img src="images/schezwan_fried_rice.jpg" alt="">
+            <a href="menu.html" class="cat">main dish</a>
+            <div class="name">Schezwan Fried Rice</div>
+            <div class="flex">
+               <div class="price"><span>Rs</span>76<span>/-</span></div>
+               <input type="number" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+            </div>
+         </div>
+        
+         <div class="box">
+            <button class="fas fa-shopping-cart" type="button" onclick="addToCart('fresh Juice', 30, this)"></button>
+            <img src="images/watermelon_juice.jpg" alt="">
+            <a href="menu.html" class="cat">main dish</a>
+            <div class="name">fresh Juice</div>
+            <div class="flex">
+               <div class="price"><span>Rs</span>30<span>/-</span></div>
+               <input type="number" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+            </div>
+         </div>
+         
+
+         <div class="box">
+            <button class="fas fa-shopping-cart" type="button" onclick="addToCart('Veg Sandwich', 32, this)"></button>
+            <img src="images/veg_sandwich.jpg" alt="">
+            <a href="menu.html" class="cat">main dish</a>
+            <div class="name">Veg Sandwich</div>
+            <div class="flex">
+               <div class="price"><span>Rs</span>32<span>/-</span></div>
+               <input type="number" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+            </div>
+         </div>
+
+      </div>
+
+      <div class="more-btn">
+         <a href="menu.html" class="btn">View all</a>
+      </div>
+
+   </section>
+
+  
+   <footer>
+      <div class="row">
+          <div class="col">
+              <h1><i>Welcome to Laxmi Caterers!</i> </h1> 
+              <br><br> 
+               <p>Hungry between lectures? Craving a quick bite or a refreshing drink? Our canteen is your go-to spot! From crispy samosas to cheesy sandwiches, from chai breaks to chilled frappés, we’ve got all your cravings covered. Whether you’re here for a power meal before class or just chilling with friends, we serve up good food and even better vibes.  
+              </p>
+          </div>
+          <div class="col">
+              <h3 style="color: #fed330;">Office <div class="underline"><span></span></div>
+              </h3>
+              <p>Mukesh Patel School Of Technology and Management
+                  VPD Scheme, Vile Parle West
+                  Mumbai, Maharashtra 400047, India</p>
+              <p class="email-id">thefeastory@gmail.com</p>
+              <h4>+91 - 0123456789</h4>
+          </div>
+          <div class="col">
+              <h3 style="color: #fed330;">Links <div class="underline"><span></span></div>
+              </h3>
+              <ul>
+                  <li><a href="login.html">Log In</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li><a href="about.html">About Us</a></li>
+              </ul>
+          </div>
+
+          <div class="col">
+            <img src="images\laxmicaterslogo.png" class="logo">
+              <div class="social-icons">
+                  <i class="fa-brands fa-facebook"></i>
+                  <i class="fa-brands fa-twitter"></i>
+                  <i class="fa-brands fa-whatsapp"></i>
+                  <i class="fa-brands fa-pinterest"></i>
+              </div>
+          </div>
+      </div>
+      <hr>
+  </footer>
+
+   <!-- <div class="loader">
+      <img src="images/loader.gif" alt="">
+   </div> -->
+</body>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="js/script.js"></script>
+<!--script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script-->
+<script>
+   const { createClient } = supabase
+   supabase = createClient('https://alqrmjghvgnbinoxsxwq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFscXJtamdodmduYmlub3hzeHdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5MTk5MDIsImV4cCI6MjA1ODQ5NTkwMn0.9HKUgPNaR3iSFIf-ztUDnizSPyErzHiRHC_ETEHlrG0')
+</script>
+<script>
+   async function name() {
+      const { data, error } = await supabase
+         .from('studentSignUp')
+         .select('Name')
+         .eq('login', 'TRUE');
+      console.log(data);
+      document.getElementById("profileName").innerHTML = data[0].Name;
+   }
+   name();
+
+   async function logout() {
+      const { error } = await supabase
+         .from('studentSignUp')
+         .update({ login: '0' })
+         .eq('login', 'TRUE')
+         document.getElementById("profileName").innerHTML = "";
+   }
+   var swiper = new Swiper(".home-slider", {
+      loop: true,
+      grabCursor: true,
+      effect: "flip",
+      pagination: {
+         el: ".swiper-pagination",
+         clickable: true,
+      },
+   });
+</script>
+<script>
+   async function addToCart(dishName, price, button) {
+      try {
+         const quantity = button.parentElement.querySelector('.qty').value || 1;
+
+         const { data, error } = await supabase
+            .from('studentSignUp')
+            .select('SAPID')
+            .eq('login', 'TRUE');
+
+         if (!data || data.length === 0) {
+            alert("User not logged in!");
+            return;
+         }
+
+         const sap = data[0].SAPID;
+
+         const { error: insertError } = await supabase
+            .from('temp_cart')
+            .insert([{
+               SAPID: sap,
+               dishName: dishName,
+               Price: price,
+               Quantity: quantity
+            }]);
+
+         if (!insertError) {
+            alert(`${dishName} added to cart!`);
+         } else {
+            console.error(insertError);
+            alert("Failed to add to cart.");
+         }
+      } catch (err) {
+         console.error("Cart Error:", err);
+         alert("Something went wrong.");
+      }
+   }
+</script>
+
+</html>

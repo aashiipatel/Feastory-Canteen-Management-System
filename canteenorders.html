@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my orders</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body ng-app="canteenorders" ng-controller="canteenordersCtrl">
+    <header class="header">
+        <section class="flex">
+            <a href="" class="logo">
+                <img src="images/wlogo.PNG" alt="Logo" width="200px">
+            </a>
+            <nav class="navbar">
+                <a href="">home</a>
+                <a href="about.html">about</a>
+                <a href="canteenmenu.html">menu</a>
+                <a href="canteenorders.html">orders</a>
+                <a href="">contact</a>
+            </nav>
+
+            <div class="icons">
+                <div id="user-btn" class="fas fa-user"></div>
+                <div id="menu-btn" class="fas fa-bars"></div>
+            </div>
+
+            <div class="profile">
+                <p class="name" id="profileName"></p>
+                <div class="flex">
+                    <button class="btn">profile</button>
+                    <button onclick="logout()" class="delete-btn">logout</button>
+                </div>
+                <p class="account"><a href="login.html">Student</a> or <a href="canteenlogin.html">Canteen
+                        Manager</a></p>
+            </div>
+
+        </section>
+
+    </header>
+    <div class="heading">
+        <h3>your orders</h3>
+        <p><a href="">home </a> <span> / orders</span></p>
+    </div>
+    <section class="orders">
+        <div class="box-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+
+            <!-- Pending Orders Column -->
+            <div style="flex: 1; min-width: 300px;">
+                <h2 class="title">Pending</h2>
+                <div ng-repeat="x in pendingOrders">
+                    <div class="box">
+                        <p> placed on : <span>{{x.created_at}}</span> </p>
+                        <p> name : <span>{{x.OrderId}}</span> </p>
+                        <p> number : <span>{{x.SAPID}}</span> </p>
+                        <p> your orders : <span>{{x.dishName}} {{x.Quantity}}</span> </p>
+                        <center>
+                            <button type="submit" class="btn" ng-click="markAsReady(x.OrderId)">Ready to serve</button>
+                        </center>
+                    </div>
+                    <br> <br>
+                </div>
+            </div>
+            <!-- Ready to Serve Column -->
+            <div style="flex: 1; min-width: 300px;">
+                <h2 class="title">Ready to Serve</h2>
+                <div ng-repeat="y in ReadyToServe">
+                    <div class="box">
+                        <p> placed on : <span>{{y.created_at}}</span> </p>
+                        <p> name : <span>{{y.OrderId}}</span> </p>
+                        <p> number : <span>{{y.SAPID}}</span> </p>
+                        <p> your orders : <span>{{y.dishName}} {{y.Quantity}}</span> </p>
+                        <center>
+                            <button type="submit" class="btn" ng-click="markAsServed(y.OrderId)">Served</button>
+                        </center>
+                    </div>
+                    <br> <br>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <footer>
+        <div class="row">
+            <div class="col">
+                <h1><i>Welcome to Laxmi Caterers!</i> </h1>
+                <br><br>
+                <p>Hungry between lectures? Craving a quick bite or a refreshing drink? Our canteen is your go-to
+                    spot! From crispy samosas to cheesy sandwiches, from chai breaks to chilled frappés, we’ve got
+                    all your cravings covered. Whether you’re here for a power meal before class or just chilling
+                    with friends, we serve up good food and even better vibes.
+                </p>
+            </div>
+            <div class="col">
+                <h3 style="color: #fed330;">Office <div class="underline"><span></span></div>
+                </h3>
+                <p>Mukesh Patel School Of Technology and Management
+                    VPD Scheme, Vile Parle West
+                    Mumbai, Maharashtra 400047, India</p>
+                <p class="email-id">thefeastory@gmail.com</p>
+                <h4>+91 - 0123456789</h4>
+            </div>
+            <div class="col">
+                <h3 style="color: #fed330;">Links <div class="underline"><span></span></div>
+                </h3>
+                <ul>
+                    <li><a href="login.html">Log In</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <img src="images\laxmicaterslogo.png" class="logo">
+                <div class="social-icons">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <i class="fa-brands fa-pinterest"></i>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </footer>
+    <!-- <div class="loader">
+   <img src="images/loader.gif" alt="">
+</div> -->
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="js/script.js"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script>
+    const { createClient } = supabase
+    supabase = createClient('https://alqrmjghvgnbinoxsxwq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFscXJtamdodmduYmlub3hzeHdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5MTk5MDIsImV4cCI6MjA1ODQ5NTkwMn0.9HKUgPNaR3iSFIf-ztUDnizSPyErzHiRHC_ETEHlrG0')
+</script>
+<script>
+    async function name() {
+        const { data, error } = await supabase
+            .from('canteenSignUp')
+            .select('Emp_ID')
+            .eq('login', 'TRUE');
+        document.getElementById("profileName").innerHTML = data[0].Emp_ID;
+    }
+    name();
+
+    async function logout() {
+        const { error } = await supabase
+            .from('canteenSignUp')
+            .update({ login: '0' })
+            .eq('login', 'TRUE')
+        document.getElementById("profileName").innerHTML = "";
+    }
+</script>
+<script>
+    var app = angular.module('canteenorders', []);
+    app.controller('canteenordersCtrl', function ($scope) {
+
+        // ✅ Function to fetch orders from Supabase
+        async function fetchOrders() {
+            try {
+                const { data: pendingOrders, error: ordersError } = await supabase
+                    .from('Orders')
+                    .select()
+                    .eq('Pending', true);
+
+                if (ordersError) {
+                    console.error("Error fetching pending orders:", ordersError);
+                    return;
+                }
+
+                const { data: ReadyToServe, error: ordersError2 } = await supabase
+                    .from('Orders')
+                    .select()
+                    .eq('Ready', true);
+
+                if (ordersError2) {
+                    console.error("Error fetching ready orders:", ordersError2);
+                    return;
+                }
+
+                $scope.pendingOrders = pendingOrders;
+                $scope.ReadyToServe = ReadyToServe;
+                $scope.$applyAsync(); // Trigger Angular digest cycle
+
+            } catch (err) {
+                console.error("Unexpected error:", err);
+            }
+        }
+
+        // ✅ Update Pending → Ready
+        $scope.markAsReady = async function (orderId) {
+            try {
+                const { error } = await supabase
+                    .from('Orders')
+                    .update({ Pending: false, Ready: true })
+                    .eq('OrderId', orderId);
+
+                if (error) {
+                    console.error("Error updating to Ready:", error);
+                    return;
+                }
+
+                fetchOrders();
+            } catch (err) {
+                console.error("Unexpected error marking as Ready:", err);
+            }
+        };
+
+        // ✅ Update Ready → Served
+        $scope.markAsServed = async function (orderId) {
+            try {
+                const { error } = await supabase
+                    .from('Orders')
+                    .update({ Ready: false, Served: true })
+                    .eq('OrderId', orderId);
+
+                if (error) {
+                    console.error("Error updating to Served:", error);
+                    return;
+                }
+
+                fetchOrders();
+            } catch (err) {
+                console.error("Unexpected error marking as Served:", err);
+            }
+        };
+
+        // ✅ Call it once when controller is loaded
+        fetchOrders();
+    });
+</script>
+
+</html>

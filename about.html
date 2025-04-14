@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>about us</title>
+
+   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+   <body>
+
+      <header class="header">
+         <section class="flex">
+            <a href="home.html" class="logo">
+               <img src="images/wlogo.PNG" alt="Logo" width="200px">
+            </a>
+            <nav class="navbar">
+               <a href="home.html">home</a>
+               <a href="about.html">about</a>
+               <a href="menu.html">menu</a>
+               <a href="orders.html">orders</a>
+               <a href="contact.html">contact</a>
+            </nav>
+
+            <div class="icons">
+               <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+               <div id="user-btn" class="fas fa-user"></div>
+               <div id="menu-btn" class="fas fa-bars"></div>
+            </div>
+
+            <div class="profile">
+               <p class="name" id="profileName"></p>
+               <div class="flex">
+                  <button onclick="window.location.href='profile.html'" class="btn">profile</button>
+                  <button onclick="logout()" class="delete-btn">logout</button>
+               </div>
+               <p class="account"><a href="login.html">Student</a> or <a href="canteenlogin.html">Canteen Manager</a>
+               </p>
+            </div>
+
+         </section>
+
+      </header>
+
+      <div class="heading">
+         <h3>about us</h3>
+         <p><a href="home.html">home </a> <span> / about</span></p>
+      </div>
+
+      <section class="about">
+
+         <div class="row">
+
+            <div class="image">
+               <img src="images/about-img.svg" alt="">
+            </div>
+
+            <div class="content">
+               <h3>🍔 About Us – Meet Feastory!</h3>
+               <p>At Feastory, we’re serving up more than just food—we’re serving convenience, connection, and care.
+
+                  We are a smart platform built to simplify how canteens and students interact. Canteens can log in, update their daily menus, and receive real-time orders from students. No more long queues, confusion, or missed meals—just a smooth, easy-to-use system that keeps everyone fed and happy.</p>
+               <a href="menu.html" class="btn">our menu</a>
+            </div>
+
+         </div>
+
+      </section>
+
+      <section class="steps">
+
+         <h1 class="title">3 simple steps</h1>
+
+         <div class="box-container">
+
+            <div class="box">
+               <img src="images/step-1.png" alt="">
+               <h3>Choose Your Feast</h3>
+               <p>Craving something? Just tap, pick, and eat—your perfect meal is a scroll away!</p>
+            </div>
+
+            <div class="box">
+               <img src="images/step-2.png" alt="">
+               <h3>Skip the Line, Not the Meal</h3>
+               <p>Your food’s ready when you are. Just walk in, grab it, and munch away—no lines, no stress! </p>
+            </div>
+
+            <div class="box">
+               <img src="images/step-3.png" alt="">
+               <h3>Fast. Simple. Delicious.</h3>
+               <p>No stress, no mess—just tap your order and get your meal, easy peasy!</p>
+            </div>
+
+         </div>
+
+      </section>
+
+      <section class="reviews">
+
+         <h1 class="title">customer reviews</h1>
+
+         <div class="swiper reviews-slider">
+
+            <div class="swiper-wrapper">
+
+               <div class="swiper-slide slide">
+                  <img src="images/pic-2..png" alt="">
+                  <p>Feastory is a total game-changer! 
+                     I ordered my lunch between lectures and 
+                     picked it up fresh and hot—no lines,
+                      no waiting. Love it!</p>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                  </div>
+                  <h3>Arhaan Bhiwandkar</h3>
+               </div>
+
+               <div class="swiper-slide slide">
+                  <img src="images/pic-1..png" alt="">
+                  <p>The canteen food was always good, but now it’s super convenient too! I can browse the menu and pre-order my fav dishes.</p>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <h3>Aanchal Shah</h3>
+               </div>
+
+               <div class="swiper-slide slide">
+                  <img src="images/pic-2..png" alt="">
+                  <p>Great website and easy to use. Sometimes the food runs out fast though—guess I need to be quicker next time!.</p>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <h3>Aryan Vora</h3>
+               </div>
+
+               <div class="swiper-slide slide">
+                  <img src="images/pic-2..png" alt="">
+                  <p>No more crowd or long lines! I just tap and collect when it’s ready. This is the future of canteen life</p>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <h3>Sharvil Gharkar</h3>
+               </div>
+
+               <div class="swiper-slide slide">
+                  <img src="images/pic-1..png" alt="">
+                  <p>Honestly, I started eating healthier just because it’s easier to see all the food options. Thanks, Feastory!</p>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <h3>Tia Gala</h3>
+               </div>
+
+               <div class="swiper-slide slide">
+                  <img src="images/pic-2..png" alt="">
+                  <p>I used to skip lunch just to avoid the crowd—now I actually look forward to it! Feastory makes food feel organized and easy.</p>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <h3>Dev Poriya</h3>
+               </div>
+
+            </div>
+
+            <div class="swiper-pagination"></div>
+
+         </div>
+
+      </section>
+      <footer>
+         <div class="row">
+            <div class="col">
+               <h1><i>Welcome to Laxmi Caterers!</i> </h1>
+               <br><br>
+               <p>Hungry between lectures? Craving a quick bite or a refreshing drink? Our canteen is your go-to spot!
+                  From crispy samosas to cheesy sandwiches, from chai breaks to chilled frappés, we’ve got all your
+                  cravings covered. Whether you’re here for a power meal before class or just chilling with friends, we
+                  serve up good food and even better vibes.
+               </p>
+            </div>
+            <div class="col">
+               <h3 style="color: #fed330;">Office <div class="underline"><span></span></div>
+               </h3>
+               <p>Mukesh Patel School Of Technology and Management
+                  VPD Scheme, Vile Parle West
+                  Mumbai, Maharashtra 400047, India</p>
+               <p class="email-id">thefeastory@gmail.com</p>
+               <h4>+91 - 0123456789</h4>
+            </div>
+            <div class="col">
+               <h3 style="color: #fed330;">Links <div class="underline"><span></span></div>
+               </h3>
+               <ul>
+                  <li><a href="login.html">Log In</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li><a href="about.html">About Us</a></li>
+              </ul>
+            </div>
+
+            <div class="col">
+               <img src="images\laxmicaterslogo.png" class="logo">
+               <div class="social-icons">
+                  <i class="fa-brands fa-facebook"></i>
+                  <i class="fa-brands fa-twitter"></i>
+                  <i class="fa-brands fa-whatsapp"></i>
+                  <i class="fa-brands fa-pinterest"></i>
+               </div>
+            </div>
+         </div>
+         <hr>
+      </footer>
+
+      <!-- <div class="loader">
+   <img src="images/loader.gif" alt="">
+</div> -->
+
+      <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+      <script src="js/script.js"></script>
+
+      <script>
+
+         var swiper = new Swiper(".reviews-slider", {
+            loop: true,
+            grabCursor: true,
+            spaceBetween: 20,
+            pagination: {
+               el: ".swiper-pagination",
+            },
+            breakpoints: {
+               550: {
+                  slidesPerView: 1,
+               },
+               768: {
+                  slidesPerView: 2,
+               },
+               1024: {
+                  slidesPerView: 3,
+               },
+            },
+         });
+
+      </script>
+
+   </body>
+
+   <script>
+      const { createClient } = supabase
+      supabase = createClient('https://alqrmjghvgnbinoxsxwq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFscXJtamdodmduYmlub3hzeHdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5MTk5MDIsImV4cCI6MjA1ODQ5NTkwMn0.9HKUgPNaR3iSFIf-ztUDnizSPyErzHiRHC_ETEHlrG0')
+   </script>
+   <script>
+      async function name() {
+         const { data, error } = await supabase
+            .from('studentSignUp')
+            .select('Name')
+            .eq('login', 'TRUE');
+         console.log(data);
+         document.getElementById("profileName").innerHTML = data[0].Name;
+      }
+      name();
+
+      async function logout() {
+         const { error } = await supabase
+            .from('studentSignUp')
+            .update({ login: '0' })
+            .eq('login', 'TRUE')
+         document.getElementById("profileName").innerHTML = "";
+      }
+   </script>
+
+</html>

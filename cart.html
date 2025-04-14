@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>my cart</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body ng-app="cart" ng-controller="cartCtrl">
+
+      <header class="header">
+         <section class="flex">
+            <a href="home.html" class="logo">
+               <img src="images/wlogo.PNG" alt="Logo" width="200px">
+            </a>
+            <nav class="navbar">
+               <a href="home.html">home</a>
+               <a href="about.html">about</a>
+               <a href="menu.html">menu</a>
+               <a href="orders.html">orders</a>
+               <a href="contact.html">contact</a>
+            </nav>
+
+            <div class="icons">
+               <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+               <div id="user-btn" class="fas fa-user"></div>
+               <div id="menu-btn" class="fas fa-bars"></div>
+            </div>
+
+            <div class="profile">
+               <p class="name" id="profileName"></p>
+               <div class="flex">
+                  <button onclick="window.location.href='profile.html'" class="btn">profile</button>
+                  <button onclick="logout()" class="delete-btn">logout</button>
+               </div>
+               <p class="account"><a href="login.html">Student</a> or <a href="canteenlogin.html">Canteen Manager</a>
+               </p>
+            </div>
+
+         </section>
+
+         <div class="heading">
+            <h3>shopping cart</h3>
+            <p><a href="home.html">home </a> <span> / cart</span></p>
+         </div>
+
+         <section class="products">
+
+            <h1 class="title">your cart</h1>
+
+            <div class="cart-total">
+               <p>grand total : <span>Rs.{{total}}</span></p>
+               <a href="checkout.html" class="btn">checkout orders</a>
+            </div>
+            </div>
+
+            <div class="box-container" style="width:max-content; margin-left: 100px;">
+
+               <div class="box" style="width:max-content;">
+                  <table style="width:max-content;">
+                     <tr ng-repeat="row in getRows()">
+                        <td ng-repeat="item in row">
+                           <form style="height: 150px; width: 250px;" accept="" class="box">
+                              <button class="fas fa-times" type="button" ng-click="deleteItem(item, $event)"></button>
+                              <div class="name">{{item.dishName}}</div>
+                              <div class="flex">
+                                 <div class="price"><span>Rs.{{item.Price}}</span></div>
+                                 <div class="name"><span>{{item.Quantity}}</span></div>
+                              </div>
+                           </form>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+
+            </div>
+
+            <div class="more-btn">
+               <a href="#" class="delete-btn" ng-click="deleteAll()">delete all</a>
+            </div>
+
+         </section>
+
+         <footer>
+            <div class="row">
+               <div class="col">
+                  <h1><i>Welcome to Laxmi Caterers!</i> </h1>
+                  <br><br>
+                  <p>Hungry between lectures? Craving a quick bite or a refreshing drink? Our canteen is your go-to
+                     spot! From crispy samosas to cheesy sandwiches, from chai breaks to chilled frappés, we’ve got all
+                     your cravings covered. Whether you’re here for a power meal before class or just chilling with
+                     friends, we serve up good food and even better vibes.
+                  </p>
+               </div>
+               <div class="col">
+                  <h3 style="color: #fed330;">Office <div class="underline"><span></span></div>
+                  </h3>
+                  <p>Mukesh Patel School Of Technology and Management
+                     VPD Scheme, Vile Parle West
+                     Mumbai, Maharashtra 400047, India</p>
+                  <p class="email-id">ticketingo3456@gmail.com</p>
+                  <h4>+91 - 0123456789</h4>
+               </div>
+               <div class="col">
+                  <h3 style="color: #fed330;">Links <div class="underline"><span></span></div>
+                  </h3>
+                  <ul>
+                     <li><a href="login.html">Log In</a></li>
+                     <li><a href="contact.html">Contact Us</a></li>
+                     <li><a href="about.html">About Us</a></li>
+                 </ul>
+               </div>
+
+               <div class="col">
+                  <img src="images\laxmicaterslogo.png" class="logo">
+                  <div class="social-icons">
+                     <i class="fa-brands fa-facebook"></i>
+                     <i class="fa-brands fa-twitter"></i>
+                     <i class="fa-brands fa-whatsapp"></i>
+                     <i class="fa-brands fa-pinterest"></i>
+                  </div>
+               </div>
+            </div>
+            <hr>
+         </footer>
+         <!-- <div class="loader">
+   <img src="images/loader.gif" alt="">
+</div> -->
+   </body>
+   <script src="js/script.js"></script>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+   <script>
+      const { createClient } = supabase
+      supabase = createClient('https://alqrmjghvgnbinoxsxwq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFscXJtamdodmduYmlub3hzeHdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5MTk5MDIsImV4cCI6MjA1ODQ5NTkwMn0.9HKUgPNaR3iSFIf-ztUDnizSPyErzHiRHC_ETEHlrG0')
+   </script>
+   <script>
+      async function name() {
+         const { data } = await supabase
+            .from('studentSignUp')
+            .select('Name')
+            .eq('login', 'TRUE');
+         document.getElementById("profileName").innerHTML = data[0]?.Name || '';
+      }
+
+      async function logout() {
+         await supabase
+            .from('studentSignUp')
+            .update({ login: '0' })
+            .eq('login', 'TRUE');
+         document.getElementById("profileName").innerHTML = "";
+      }
+
+      name();
+   </script>
+
+   <script>
+      var app = angular.module('cart', []);
+      app.controller('cartCtrl', function ($scope) {
+         $scope.cartList = [];
+         $scope.total = 0;
+
+         async function fetchCart() {
+            const { data, error } = await supabase.from('temp_cart').select();
+            if (error) return console.error("Error fetching cart:", error);
+
+            $scope.cartList = data.map(item => ({
+               OrderID: item.OrderID,
+               SAPID: item.SAPID,
+               dishName: item.dishName,
+               Quantity: item.Quantity,
+               Price: item.Price
+            }));
+
+            $scope.calculateTotal();
+            $scope.$applyAsync();
+         }
+
+         $scope.getRows = function () {
+            let rows = [];
+            for (let i = 0; i < $scope.cartList.length; i += 3) {
+               rows.push($scope.cartList.slice(i, i + 3));
+            }
+            return rows;
+         };
+
+         $scope.calculateTotal = function () {
+            $scope.total = $scope.cartList.reduce((sum, item) => {
+               return sum + (item.Price * item.Quantity);
+            }, 0).toFixed(2);
+         };
+
+         $scope.deleteItem = async function (item) {
+            const { data } = await supabase
+               .from('studentSignUp')
+               .select('SAPID')
+               .eq('login', 'TRUE');
+               const sap = data[0]?.SAPID;
+               
+            if (!confirm("Delete this item?")) return;
+            const { error } = await supabase
+               .from('temp_cart')
+               .delete()
+               .eq('SAPID', sap)
+               .eq('dishName', item.dishName);
+            if (!error) {
+               await fetchCart();
+            } else {
+               console.error("Delete error:", error);
+            }
+         };
+
+         $scope.deleteAll = async function () {
+            if (!confirm("Delete all from cart?")) return;
+            const { data } = await supabase
+               .from('studentSignUp')
+               .select('SAPID')
+               .eq('login', 'TRUE');
+
+            const sap = data[0]?.SAPID;
+            if (!sap) return;
+
+            const { error } = await supabase
+               .from('temp_cart')
+               .delete()
+               .eq('SAPID', sap);
+
+            if (!error) {
+               $scope.cartList = [];
+               $scope.total = 0;
+               $scope.$applyAsync();
+            } else {
+               console.error("Delete all error:", error);
+            }
+         };
+
+         fetchCart();
+      });
+   </script>
+
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>register</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+   <header class="header">
+      <section class="flex">
+         <a href="home.html" class="logo">
+            <img src="images/wlogo.PNG" alt="Logo" width="200px">
+         </a>
+         <nav class="navbar">
+            <a href="home.html">home</a>
+            <a href="about.html">about</a>
+            <a href="menu.html">menu</a>
+            <a href="orders.html">orders</a>
+            <a href="contact.html">contact</a>
+         </nav>
+
+         <div class="icons">
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="menu-btn" class="fas fa-bars"></div>
+         </div>
+
+         <div class="profile">
+            <p class="name" id="profileName"></p>
+            <div class="flex">
+               <button onclick="window.location.href='profile.html'" class="btn">profile</button>
+               <button onclick="logout()" class="delete-btn">logout</button>
+            </div>
+            <p class="account"><a href="login.html">Student</a> or <a href="canteenlogin.html">Canteen Manager</a></p>
+         </div>
+
+      </section>
+
+   </header>
+
+   <section class="form-container">
+      <!--check why after alert it reloads to home-->
+      <form action="" method="post" id="SignUp">
+         <h3>register now</h3>
+         <input type="text" id="name" name="Name" placeholder="enter your name" class="box">
+         <input type="email" id="email" name="emailID" placeholder="enter your email" class="box">
+         <input type="numner" id="sapid" name="SAPID" placeholder="enter your SAP ID" class="box">
+         <input type="password" id="pass" name="Password" placeholder="enter your password" class="box">
+         <button type="submit" onclick="validate()" value="register now" class="btn" name="submit"> Register </button>
+         <p>already have an account? <a href="login.html">login now</a></p>
+      </form>
+
+   </section>
+
+  
+   <footer>
+      <div class="row">
+          <div class="col">
+              <h1><i>Welcome to Laxmi Caterers!</i> </h1> 
+              <br><br> 
+               <p>Hungry between lectures? Craving a quick bite or a refreshing drink? Our canteen is your go-to spot! From crispy samosas to cheesy sandwiches, from chai breaks to chilled frappés, we’ve got all your cravings covered. Whether you’re here for a power meal before class or just chilling with friends, we serve up good food and even better vibes.  
+              </p>
+          </div>
+          <div class="col">
+              <h3 style="color: #fed330;">Office <div class="underline"><span></span></div>
+              </h3>
+              <p>Mukesh Patel School Of Technology and Management
+                  VPD Scheme, Vile Parle West
+                  Mumbai, Maharashtra 400047, India</p>
+              <p class="email-id">thefeastory@gmail.com</p>
+              <h4>+91 - 0123456789</h4>
+          </div>
+          <div class="col">
+              <h3 style="color: #fed330;">Links <div class="underline"><span></span></div>
+              </h3>
+              <ul>
+               <li><a href="login.html">Log In</a></li>
+               <li><a href="contact.html">Contact Us</a></li>
+               <li><a href="about.html">About Us</a></li>
+           </ul>
+          </div>
+
+          <div class="col">
+            <img src="images\laxmicaterslogo.png" class="logo">
+              <div class="social-icons">
+                  <i class="fa-brands fa-facebook"></i>
+                  <i class="fa-brands fa-twitter"></i>
+                  <i class="fa-brands fa-whatsapp"></i>
+                  <i class="fa-brands fa-pinterest"></i>
+              </div>
+          </div>
+      </div>
+      <hr>
+  </footer>
+   <!-- <div class="loader">
+      <img src="images/loader.gif" alt="">
+   </div> -->
+</body>
+<script src="js/script.js"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script>
+   const { createClient } = supabase
+   supabase = createClient('https://alqrmjghvgnbinoxsxwq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFscXJtamdodmduYmlub3hzeHdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5MTk5MDIsImV4cCI6MjA1ODQ5NTkwMn0.9HKUgPNaR3iSFIf-ztUDnizSPyErzHiRHC_ETEHlrG0')
+</script>
+<script>
+   function validate() {
+      let name = document.getElementById('name').value
+      let email = document.getElementById('email').value
+      let sapid = document.getElementById('sapid').value
+      let pass = document.getElementById('pass').value
+
+      let nameRegex = /^[a-zA-Z\s]*$/;
+      let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|in|edu)$/;
+      let sapidRegex = /^[1-9][0-9]{10}$/;
+      let passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$#!%*&])[A-Za-z\d@$#!%*&]{8,}$/;
+
+      if (name === "") {
+         alert("Name is required.");
+         return
+      } else if (!nameRegex.test(name)) {
+         alert("Name must have only letters");
+         return
+      }
+      if (email === "") {
+         alert("Email is required.");
+         return
+      } else if (!emailRegex.test(email)) {
+         alert("Please enter a valid email address.");
+         return
+      }
+
+      if (sapid === "") {
+         alert("SAPID is required.");
+         return
+      } else if (!sapidRegex.test(sapid)) {
+         alert("SAPID should be exactly 11 digits and should not start with 0.");
+         return
+      }
+
+      if (pass === "") {
+         alert("Password required.");
+         return
+      } else if (!passwordRegex.test(pass)) {
+         alert("Password must have 8+ chars, 1 uppercase, 1 lowercase, 1 number, and 1 special symbol.");
+         return;
+      }
+      databasetransfer();
+   }
+</script>
+<script>
+   function databasetransfer() {
+      const form = document.querySelector('#SignUp')
+      form.addEventListener('submit', async (event) => {
+         event.preventDefault()
+         const formInputs = form.querySelectorAll('input')
+         let submission = {}
+         formInputs.forEach(element => {
+            const { value, name } = element
+            if (value) {
+               submission[name] = value
+            }
+         })
+         console.log(submission)
+         const { error, data } = await supabase.from('studentSignUp').insert([submission])
+         if (error) {
+            alert("there was an error");
+         }
+         else {
+            window.location.href = 'home.html';
+         }
+      })
+   }
+
+</script>
+
+</html>
